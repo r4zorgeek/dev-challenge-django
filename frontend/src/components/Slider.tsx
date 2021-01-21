@@ -7,7 +7,9 @@ import {
     SliderProps,
     Text,
     Box,
+    HStack
 } from '@chakra-ui/react'
+import CSS from 'csstype'
 
 type Props = SliderProps & {
     label?: string
@@ -22,6 +24,11 @@ const Slider = ({ label, ...rest }: Props) => (
             </SliderTrack>
             <SliderThumb />
         </ChakraSlider>
+        <HStack spacing={50} align="stretch" justify="space-between">
+            <label>{rest.min}</label>
+            <label color="red">Value: {rest.value}</label>
+            <label>{rest.max}</label>
+        </HStack>
     </Box>
 )
 
