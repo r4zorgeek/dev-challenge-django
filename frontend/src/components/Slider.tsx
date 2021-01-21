@@ -22,7 +22,7 @@ const Slider = ({ label, ...rest }: Props) => (
             <SliderTrack>
                 <SliderFilledTrack bg="primary" />
             </SliderTrack>
-            <SliderThumb />
+            <SliderThumb color="black" bg="black"/>
         </ChakraSlider>
         <HStack spacing={50} align="stretch" justify="space-between">
             <label>{rest.min}</label>
