@@ -26,6 +26,12 @@ const LineChart = ({ xAxisData, yAxisData, title, xLabel, yLabel }: Props) => {
                 {
                     scaleLabel: { display: !!yLabel, labelString: yLabel },
                     gridlines: { display: false },
+                    ticks: {
+                        callback(value: Number) {
+                            // src: https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+                            return value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
+                        },
+                    },
                 },
             ],
             xAxes: [
