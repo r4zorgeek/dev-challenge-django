@@ -1,4 +1,4 @@
-import fullBrandLogo from '../static/images/finimize-logo-full-brand.png'
+import fullBrandLogo from '../logo.svg'
 
 const images = {
     fullBrandLogo,
