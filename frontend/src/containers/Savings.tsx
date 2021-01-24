@@ -1,12 +1,33 @@
-import React, { useState, useEffect} from 'react'
-import { Box, Container, Heading, SliderThumb, VStack } from '@chakra-ui/react'
+import React, { useState, useEffect } from 'react'
+import {
+    Box,
+    Container,
+    Heading,
+    SliderThumb,
+    NumberInput,
+    NumberInputField,
+    VStack,
+} from '@chakra-ui/react'
 import Input from '../components/Input'
 import Slider from '../components/Slider'
 import LineChart from '../components/LineChart'
 import DefaultLayout from '../components/layouts/Default'
+import CSS from 'csstype'
+
+const cardStyle: CSS.Properties = {
+    margin: '30px auto',
+    borderRadius: '40px',
+    boxShadow: '5px 5px 30px 7px rgba(0,0,0,0.10), -5px -5px 30px 7px rgba(0,0,0,0.10)',
+}
+
+const inputStyle: CSS.Properties = {
+    width: '100%',
+}
 
 const Savings = () => {
     let URL = 'http://127.0.0.1:8000'
+    const defaultSavingsAmount = 5000
+    const defaultMonthlyDeposit = 10
 
     // function for requesting compound interest data
     const fetchData = async () => {
@@ -33,8 +54,8 @@ const Savings = () => {
         setSavingsData(jsonResponse['compound_data_yearly'])
     }
 
-    const [savingsAmount, setSavingsAmount] = useState(5000)
-    const [depositAmount, setDepositAmount] = useState(10)
+    const [savingsAmount, setSavingsAmount] = useState(defaultSavingsAmount)
+    const [depositAmount, setDepositAmount] = useState(defaultMonthlyDeposit)
     const [interestRate, setInterestRate] = useState(1)
     const [savingsData, setSavingsData] = useState([])
 
@@ -58,7 +79,7 @@ const Savings = () => {
 
     return (
         <DefaultLayout>
-            <Container pt={6}>
+            <Container style={cardStyle} pt={6}>
                 <VStack spacing={4}>
                     <Heading as="h1">Interest Rate Calculator</Heading>
                     <Input
@@ -66,7 +87,6 @@ const Savings = () => {
                         name="Initial Savings"
                         placeholder="5000"
                         value={savingsAmount.toString()}
-                        min={0}
                         onChange={(e) => setSavingsAmount(Number(e.target.value))}
                     />
                     <Input
