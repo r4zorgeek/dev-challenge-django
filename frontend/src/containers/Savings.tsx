@@ -12,16 +12,14 @@ import Input from '../components/Input'
 import Slider from '../components/Slider'
 import LineChart from '../components/LineChart'
 import DefaultLayout from '../components/layouts/Default'
+import Card from '../components/Card'
 import CSS from 'csstype'
 
 const cardStyle: CSS.Properties = {
     margin: '30px auto',
     borderRadius: '40px',
     boxShadow: '5px 5px 30px 7px rgba(0,0,0,0.10), -5px -5px 30px 7px rgba(0,0,0,0.10)',
-}
-
-const inputStyle: CSS.Properties = {
-    width: '100%',
+    padding: '20px',
 }
 
 const Savings = () => {
@@ -79,7 +77,7 @@ const Savings = () => {
 
     return (
         <DefaultLayout>
-            <Container style={cardStyle} pt={6}>
+            <Card pt={6}>
                 <VStack spacing={4}>
                     <Heading as="h1">Interest Rate Calculator</Heading>
                     <Input
@@ -116,7 +114,7 @@ const Savings = () => {
                         yLabel="Amount $"
                     />
                 </VStack>
-            </Container>
+            </Card>
         </DefaultLayout>
     )
 }
