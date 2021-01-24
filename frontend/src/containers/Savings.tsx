@@ -4,7 +4,6 @@ import {
     Container,
     Heading,
     SliderThumb,
-    NumberInput,
     NumberInputField,
     VStack,
 } from '@chakra-ui/react'
@@ -13,6 +12,7 @@ import Slider from '../components/Slider'
 import LineChart from '../components/LineChart'
 import DefaultLayout from '../components/layouts/Default'
 import Card from '../components/Card'
+import NumberInput from '../components/NumberInput'
 import CSS from 'csstype'
 
 const cardStyle: CSS.Properties = {
@@ -80,19 +80,19 @@ const Savings = () => {
             <Card pt={6}>
                 <VStack spacing={4}>
                     <Heading as="h1">Interest Rate Calculator</Heading>
-                    <Input
-                        label="Initial Savings amount"
-                        name="Initial Savings"
-                        placeholder="5000"
+                    <NumberInput 
+                        label="Initial Savings Amount"
+                        defaultValue={defaultSavingsAmount}
+                        min={0}
                         value={savingsAmount.toString()}
-                        onChange={(e) => setSavingsAmount(Number(e.target.value))}
+                        onChange={(e) => setSavingsAmount(Number(e))}
                     />
-                    <Input
+                    <NumberInput
                         label="Monthly Deposit"
-                        name="Monthly Deposit"
-                        placeholder="10"
+                        defaultValue={defaultMonthlyDeposit}
+                        min={0}
                         value={depositAmount.toString()}
-                        onChange={(e) => setDepositAmount(Number(e.target.value))}
+                        onChange={(e) => setDepositAmount(Number(e))}
                     />
                     <Slider
                         label="Interest Rate"
