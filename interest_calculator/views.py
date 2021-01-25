@@ -16,13 +16,15 @@ def interest_data(request):
         return HttpResponseBadRequest()
     
     interest_rate = round(int(request_json['interest-rate']) / 100, 2)
-    compound_interest_yearly = []
+    compound_interest_yearly = [savings_amount]
     
-    for year in range(0, 51):
-        r = (((1 + interest_rate) ** (year)))
-        compound_interest_yearly.append(round((monthly_deposit * ((r-1)/interest_rate)) + (savings_amount * r), 2))
-        # compound_interest_yearly[year] = savings_amount
+    for year in range(1, 51):
+        # formula src : https://www.thecalculatorsite.com/articles/finance/compound-interest-formula.php
+        r = (1 + (interest_rate/12)) ** (12 * year)
+        compound_interest_pnc = savings_amount * r
+        future_value = monthly_deposit * ((r - 1) / (interest_rate/12))
+        compound_interest_yearly.append(round(compound_interest_pnc + future_value, 2)) 
         
-        response_result = {'compound_data_yearly': compound_interest_yearly}
+    response_result = {'compound_data_yearly': compound_interest_yearly}
         
     return JsonResponse(response_result)
