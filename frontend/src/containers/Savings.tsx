@@ -46,6 +46,11 @@ const Savings = () => {
         }
 
         let getData = await fetch(URL + '/interest-data/', requestOptions)
+        if (!getData.ok) {
+            console.log('Data Error')
+            return
+        }
+
         let jsonResponse = await getData.json()
 
         localStorage.setItem(key, JSON.stringify(jsonResponse['compound_data_yearly']))
@@ -65,7 +70,7 @@ const Savings = () => {
             return
         }
 
-        const timeOutId = setTimeout(() => fetchData(), 150)
+        const timeOutId = setTimeout(() => fetchData().catch((err) => console.log('Network Error')), 150)
         return () => clearTimeout(timeOutId)
     }, [savingsAmount, depositAmount, interestRate])
 
