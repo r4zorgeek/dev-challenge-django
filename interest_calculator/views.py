@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseBadRequest
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -7,8 +7,14 @@ import json
 @csrf_exempt
 def interest_data(request):
     request_json = json.loads(request.body.decode())
-    savings_amount = int(request_json['savings-amount'])
-    monthly_deposit = int(request_json['monthly-deposit'])
+    savings_amount = 5000
+    monthly_deposit = 10
+    try:
+        savings_amount = int(request_json['savings-amount'])
+        monthly_deposit = int(request_json['monthly-deposit'])    
+    except:
+        return HttpResponseBadRequest()
+    
     interest_rate = round(int(request_json['interest-rate']) / 100, 2)
     compound_interest_yearly = []
     
